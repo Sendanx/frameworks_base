@@ -63,7 +63,7 @@ public class ScreenRecorder {
      *                    Surface.ROTATION_270
      * @param width Width of the video output.
      * @param height Height of the video output.
-     * @param bitRate Bitrate to record at, default is 10000000.
+     * @param bitRate Bitrate to record at, default is 8000000.
      * @param timeLimitSec Maximum time to record for.  Maximum allowed is 3600 seconds (1 hour).
      */
     public void init(int rotation, int width, int height, int bitRate, int timeLimitSec) {

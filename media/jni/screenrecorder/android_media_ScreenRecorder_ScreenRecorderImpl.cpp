@@ -71,7 +71,7 @@ static uint32_t gOrientation = DISPLAY_ORIENTATION_0;    // rotaiton of display
 static bool gSizeSpecified = false;         // was size explicitly requested?
 static uint32_t gVideoWidth = 0;            // default width+height
 static uint32_t gVideoHeight = 0;
-static uint32_t gBitRate = 4000000;         // 4Mbps
+static uint32_t gBitRate = 8000000;         // 8Mbps
 static uint32_t gTimeLimitSec = kMaxTimeLimitSec;
 static char gFileName[256];
 
