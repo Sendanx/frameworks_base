@@ -940,9 +940,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     };
 
-<<<<<<< HEAD
-    void showGlobalActionsDialog(boolean pokeWakeLock) {
-=======
     private final Runnable mScreenrecordRunnable = new Runnable() {
         @Override
         public void run() {
@@ -950,8 +947,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     };
 
-    void showGlobalActionsDialog() {
->>>>>>> 4b79eae... base: Add a key combo to start/stop video recording
+    void showGlobalActionsDialog(boolean pokeWakeLock) {
         if (mGlobalActions == null) {
             mGlobalActions = new GlobalActions(mContext, mWindowManagerFuncs);
         }
