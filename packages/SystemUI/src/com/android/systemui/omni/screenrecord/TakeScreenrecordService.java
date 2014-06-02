@@ -38,6 +38,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 
 public class TakeScreenrecordService extends Service {
     private static final String TAG = "TakeScreenrecordService";
@@ -77,12 +78,12 @@ public class TakeScreenrecordService extends Service {
         } else if (intent.getAction().equals(ACTION_STOP)) {
             stopScreenrecord();
         } else if (intent.getAction().equals(ACTION_TOGGLE_POINTER)) {
-            int currentStatus = Settings.System.getIntForUser(getContentResolver(),
-                        Settings.System.SHOW_TOUCHES, 0, UserHandle.USER_CURRENT);
-
-            Settings.System.putIntForUser(getContentResolver(), Settings.System.SHOW_TOUCHES,
-                        1 - currentStatus, UserHandle.USER_CURRENT);
-            mScreenrecord.updateNotification();
+            try {
+                int currentStatus = Settings.System.getInt(getContentResolver(), Settings.System.SHOW_TOUCHES);
+                Settings.System.putInt(getContentResolver(), Settings.System.SHOW_TOUCHES, 1 - currentStatus);
+            } catch (SettingNotFoundException ignore) {
+                // ignored
+            }
         }
 
         return super.onStartCommand(intent, flags, startId);
@@ -102,8 +103,7 @@ public class TakeScreenrecordService extends Service {
         mScreenrecord.stopScreenrecord();
 
         // Turn off pointer in all cases
-        Settings.System.putIntForUser(getContentResolver(), Settings.System.SHOW_TOUCHES,
-                0, UserHandle.USER_CURRENT);
+        Settings.System.putInt(getContentResolver(), Settings.System.SHOW_TOUCHES, 0);
     }
 
     private void toggleScreenrecord() {
